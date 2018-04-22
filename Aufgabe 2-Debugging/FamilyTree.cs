@@ -12,7 +12,8 @@ namespace Debugging
         public Person Mom;
         public Person Dad;
 
-        public override string ToString(){
+        public override string ToString()
+        {
         return ($"{FirstName} {LastName}"); 
         }
     }
@@ -25,13 +26,15 @@ namespace Debugging
             if (person.LastName == "Battenberg")
                 return person; 
 
-            if(person.Mom != null){
+            if(person.Mom != null)
+            {
             ret = Find(person.Mom);
             if (ret != null)
                 return ret;
             }
 
-            if (person.Dad != null){
+            if (person.Dad != null)
+            {
             ret = Find(person.Dad);
             if (ret != null)
                 return ret;
