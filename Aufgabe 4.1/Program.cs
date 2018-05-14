@@ -25,28 +25,23 @@ namespace L05_GenericTree
 
             
             root.PrintTree();  
-            var example = (tree.Find("child1"));
+
+            root.Search("child");
+           
         }
     }
 
     public class Tree<Type>
     {       
-        public List<TreeNode<Type>> Nodes = new List<TreeNode<Type>>(); 
         public TreeNode<Type> CreateNode(Type data)
         {
             TreeNode<Type> newNode = new TreeNode<Type>
             {
                 Data = data
             };
-            Nodes.Add(newNode);
             return newNode;
         }
-
-         public List<TreeNode<Type>> Find (Type search)
-        {
-            return (Nodes.FindAll(x => x.Data.Equals(search)));
-        }
-    }
+    }           
 
     public class TreeNode<Type>
     {
@@ -74,5 +69,22 @@ namespace L05_GenericTree
         {
             Children.Remove(child);
         }
+
+        public List<TreeNode<Type>> Search (Type search, List<TreeNode<Type>> result = null)
+        {
+            if (result == null)
+                result = new List<TreeNode<Type>>();
+
+            if (this.Data.Equals(search))
+                result.Add(this);
+
+            foreach(TreeNode<Type> element in Children)
+            {
+                element.Search(search,result);
+            }
+
+            return result;
+        }
+
     }
 }
