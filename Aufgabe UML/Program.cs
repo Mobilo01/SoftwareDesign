@@ -12,55 +12,54 @@ namespace Aufgabe_UML
 
     class Person 
     {
-        public string Name;
         public int Alter;
+        public String Name;
     }
 
-    class Teilnehmer: Person
+    class Dozent : Person
     {
-        public int Matrikelnummer;
-        
-        public List<Kurs> Kurse;
-    }
+        public String Raum;
+        public String Sprechstunde;
 
-    class Dozent: Person
-    {
-        public string Raum;
-        public string Sprechstunde;
+        List<Kurs> Kursliste = new List<Kurs>;
 
-        public List<Kurs> Kurse;
-
-        public void SeineKurse ()
-        {
-            foreach (Kurs kurs in Kurse)
+        public void SeineKurse()
+        {   
+            foreach (Kurs kurs in Kursliste)
                 Console.WriteLine(kurs.Titel);
         }
 
         public List<Teilnehmer> AlleKursTeilnehmer()
         {
-            List<Teilnehmer> alleTeilnehmer = new List<Teilnehmer>();
-            
-            foreach (Kurs kurs in Kurse)
-                foreach(Teilnehmer teilnehmer in kurs.Teilnehmer)
-                    if(!alleTeilnehmer.Contains(teilnehmer))
-                        alleTeilnehmer.Add(teilnehmer);
-
-            return alleTeilnehmer;
+            foreach (Kurs kurs in Kursliste)
+                {
+                    foreach (Teilnehmer teilnehmer in Teilnehmerliste)
+                    {
+                        Teilnehmerliste.Add(Teilnehmer teilnehmer);
+                    }
+                }
+            return Alle;
         }
     }
 
-    class Kurs
+    class Teilnehmer : Person
     {
-        public string Titel;
-        public string Termin;
-        public string Raum;
+        public int Matrikelnummer;
 
-        public Dozent Dozent;
-        public List<Teilnehmer> Teilnehmer;
+        List<Kurs> SeineKursliste = new List<Kurs>;
+    }
 
-        public void KursInfotext()
+    class Kurs 
+    {
+        public String Titel;
+        public String Raum;
+        public String Termin;
+
+        public List<Teilnehmer> Teilnehmerliste = new List<Teilnehmer>;
+
+        public void KursInfoText(Kurs kurs)
         {
-            Console.WriteLine("Der Kurs " + Titel + " findet am " + Termin + " in Raum " + Raum + " statt.");
+            Console.WriteLine("Der Kurs" + kurs.Titel + "findet am" + kurs.Termin + "im Raum" + kurs.Raum + "statt")
         }
     }
 }
