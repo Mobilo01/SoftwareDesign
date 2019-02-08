@@ -1,0 +1,10 @@
+C:\Users\Philipp\Documents\Documents\Studium\5. Semester\SoftwareDesign\TimeTableGenerator\bin\Debug\netcoreapp1.1\TimeTableGenerator.deps.json
+C:\Users\Philipp\Documents\Documents\Studium\5. Semester\SoftwareDesign\TimeTableGenerator\bin\Debug\netcoreapp1.1\TimeTableGenerator.runtimeconfig.json
+C:\Users\Philipp\Documents\Documents\Studium\5. Semester\SoftwareDesign\TimeTableGenerator\bin\Debug\netcoreapp1.1\TimeTableGenerator.runtimeconfig.dev.json
+C:\Users\Philipp\Documents\Documents\Studium\5. Semester\SoftwareDesign\TimeTableGenerator\obj\Debug\netcoreapp1.1\TimeTableGenerator.csprojResolveAssemblyReference.cache
+C:\Users\Philipp\Documents\Documents\Studium\5. Semester\SoftwareDesign\TimeTableGenerator\obj\Debug\netcoreapp1.1\TimeTableGenerator.csproj.CoreCompileInputs.cache
+C:\Users\Philipp\Documents\Documents\Studium\5. Semester\SoftwareDesign\TimeTableGenerator\obj\Debug\netcoreapp1.1\TimeTableGenerator.AssemblyInfo.cs
+C:\Users\Philipp\Documents\Documents\Studium\5. Semester\SoftwareDesign\TimeTableGenerator\bin\Debug\netcoreapp1.1\TimeTableGenerator.dll
+C:\Users\Philipp\Documents\Documents\Studium\5. Semester\SoftwareDesign\TimeTableGenerator\bin\Debug\netcoreapp1.1\TimeTableGenerator.pdb
+C:\Users\Philipp\Documents\Documents\Studium\5. Semester\SoftwareDesign\TimeTableGenerator\obj\Debug\netcoreapp1.1\TimeTableGenerator.dll
+C:\Users\Philipp\Documents\Documents\Studium\5. Semester\SoftwareDesign\TimeTableGenerator\obj\Debug\netcoreapp1.1\TimeTableGenerator.pdb

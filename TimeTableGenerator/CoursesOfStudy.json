@@ -1,0 +1,76 @@
+[
+
+{          
+    "name": "MIB 1", 
+    "studentAmount": "40", 
+    "semester": "1",
+
+    "mandatoryCourses":[
+        {
+            "name":"Mathe 1"
+        }, 
+        {
+            "name":"Videotechnik"
+        },
+        {
+            "name":"Audiotechnik"
+        },
+        {
+            "name":"Medientechnik Praktikum"
+        },
+        {
+            "name":"Grundlagen BWL"
+        },
+        {
+            "name":"Mediengestaltung"
+        },
+        {
+            "name":"Mediengestaltung Praktikum"
+        },
+        {
+            "name":"Medientechnik Praktikum"
+        },
+        {
+            "name":"Medienpsychologie"
+        },
+        {
+            "name": "Programmieren Praktikum"
+        },{
+            "name": "Physik"
+        },
+        {
+            "name":"Programmieren"
+        }
+    ]
+},
+{          
+    "name": "OMB 1", 
+    "studentAmount": "39", 
+    "semester": "1",
+
+    "mandatoryCourses":[
+        {
+            "name":"Mathe 1"
+        }, 
+        {
+            "name":"Videotechnik"
+        },
+        {
+            "name":"Audiotechnik"
+        },
+        {
+            "name":"Grundlagen BWL"
+        },
+        {
+            "name":"Mediengestaltung"
+        },
+        {
+            "name":"Mediengestaltung Praktikum"
+        },
+        {
+            "name":"Medienpsychologie"
+        }
+    ]
+}
+
+]

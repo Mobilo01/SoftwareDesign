@@ -1,0 +1,33 @@
+[
+
+    {          
+        "name": "I0.13", 
+        "seatAmount": "31",
+        "roomEquipment":[
+            "Computer", 
+            "Tafel"
+        ]
+    },
+
+    {          
+        "name": "I0.14", 
+        "seatAmount": "33",
+        "roomEquipment":[
+            "Computer", 
+            "Tafel",
+            "Whiteboard"
+        ]
+    },
+
+    {          
+    "name": "I0.17", 
+    "seatAmount": "120",
+    "RoomEquipment":[
+        "Computer", 
+        "Tafel",
+        "Whiteboard",
+        "Beamer"
+        ]
+    }
+
+]
