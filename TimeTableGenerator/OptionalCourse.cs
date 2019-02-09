@@ -1,10 +1,14 @@
 using System.Collections.Generic;
 
 public class OptionalCourse{
+    
     public string name;
     public string description;
-    public Block block;
-    public Prof prof;
     public Room room;
+    public int studentAmount;
+    public Prof prof;
+    public Block block;
+    public TimeSpanDay timeSpanDay;
+    public bool opCourseUsed;
     public List<string> equipment;
 }

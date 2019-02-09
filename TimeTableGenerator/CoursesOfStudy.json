@@ -71,6 +71,28 @@
             "name":"Medienpsychologie"
         }
     ]
+},
+{          
+    "name": "MKB 1", 
+    "studentAmount": "41", 
+    "semester": "1",
+
+    "mandatoryCourses":[
+        {
+            "name":"Videotechnik"
+        }
+    ]
+},
+{          
+    "name": "MIB 2", 
+    "studentAmount": "32", 
+    "semester": "2",
+
+    "mandatoryCourses":[
+        {
+            "name":"Mathe 2"
+        }
+    ]
 }
 
 ]

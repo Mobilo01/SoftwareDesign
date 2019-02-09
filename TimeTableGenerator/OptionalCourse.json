@@ -1,0 +1,46 @@
+[
+
+    {          
+        "name": "VFX", 
+        "description": "Effekte und so", 
+        "timeSpanDay":
+            {
+                "start": "2019-01-01T14:00:00",
+                "end": "2019-01-01T15:30:00",
+                "day": "Mittwoch"
+            }, 
+        "equipment":[
+            "Tafel",
+            "Computer"
+        ]
+    },
+    {          
+        "name": "2D-Spieleprogrammierung", 
+        "description": "2D Spieleprogrammierung", 
+        "timeSpanDay":
+            {
+                "start": "2019-01-01T14:00:00",
+                "end": "2019-01-01T15:30:00",
+                "day": "Dienstag"
+            }, 
+         
+        "equipment":[
+            "Tafel",
+            "Computer"
+        ]
+    },
+    {          
+        "name": "3D-Spieleprogrammierung", 
+        "description": "3D Spieleprogrammierung", 
+        "timeSpanDay":
+            {
+                "start": "2019-01-01T15:45:00",
+                "end": "2019-01-01T17:15:00",
+                "day": "Dienstag"
+            }, 
+        "equipment":[
+            "Tafel",
+            "Computer"
+        ]
+    }
+]

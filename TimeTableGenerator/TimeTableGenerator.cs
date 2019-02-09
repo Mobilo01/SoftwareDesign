@@ -9,6 +9,7 @@ public class TimetableGenerator {
     public static List<Day> week;
     public static TimeSpan[] times;
     public static List<Course> courses;
+    public static List<OptionalCourse> optionalCourses;
     public static List<Room> rooms;
 
     public static List<Prof> profs;
@@ -20,10 +21,15 @@ public class TimetableGenerator {
         LoadJsonCourses ();
         LoadMandatoryCourses ();
         LoadProfsToCourses ();
+       // LoadOptionalCourses ();
 
         Initializer ();
 
+        //GenerateOptionalTimetable ();
+
         GenerateTimetable ();
+
+        SortBy ();
 
     }
 
@@ -59,6 +65,8 @@ public class TimetableGenerator {
         }
         foreach (Day d in week) {
             foreach (Block b in d.blocks) {
+                List<Course> blockCourses = new List<Course> ();
+                b.blockCourses = blockCourses;
                 foreach (CourseOfStudy cos in coursesOfStudy) {
                     foreach (Course c in cos.mandatoryCourses) {
                         foreach (var v in c.coursesOfStudy) {
@@ -83,31 +91,129 @@ public class TimetableGenerator {
                                                         c.courseUsed = true;
                                                         c.room.roomUsed = true;
                                                         c.prof.profUsed = true;
+                                                        
+                                                        //int number = b.blockNumber + 1;
 
-                                                        Console.WriteLine (c.name);
-                                                        Console.WriteLine (c.description);
+                                                        /*Console.WriteLine (c.name);
+                                                        //Console.WriteLine (c.description);
                                                         Console.WriteLine ("in " + c.room.name);
                                                         Console.WriteLine ("unterrichtet von " + c.prof.name);
-                                                        Console.WriteLine ("für " + c.studentAmount + " Leute");
-                                                        Console.WriteLine ("im " + b.blockNumber + "");
-                                                        foreach (var v in c.coursesOfStudy)
-                                                            Console.WriteLine ("für " + v.name);
+                                                        //Console.WriteLine ("fur " + c.studentAmount + " Leute");
+                                                        Console.WriteLine ("Am " + d.day);
+                                                        Console.WriteLine ("im " + number + ". Block");
+                                                        //foreach (var v in c.coursesOfStudy)
+                                                        //    Console.WriteLine ("fur " + v.name);
+                                                        Console.WriteLine (" ");*/
                                                         b.blockCourses.Add (c);
                                                     }
                                                 }
-                                            } else
-                                                Console.WriteLine (c.name + ": Der Raum hat das entsprechende Material nicht.");
+                                            } //else
+                                             //   Console.WriteLine (c.name + ": Der Raum " + r.name + " hat das entsprechende Material nicht.");
                                         }
-                                    } else
-                                        Console.WriteLine (c.name + ": Der Raum ist nicht groß genug.");
+                                    } //else
+                                     //   Console.WriteLine (c.name + ": Der Raum " + r.name + " ist nicht gross genug.");
                                 }
+                            }
+                        }
+                        c.studentAmount = 0;
+                    }
+                }
+                foreach (Course cb in b.blockCourses) {
+                    cb.room.roomUsed = false;
+                    cb.prof.profUsed = false;
+                }
+            }
+        }
+    }
+
+    public static void SortBy(){
+        Console.WriteLine("Wahlen Sie entweder Dozent, Raume, MIB, MKB, OMB oder nichts");
+        Console.WriteLine(" ");
+        string con = Console.ReadLine();
+        Console.WriteLine(" ");
+
+        switch(con)
+      {
+        case "Dozent":
+            Console.WriteLine(" ");
+            foreach(Prof p in profs) {
+                foreach (Day d in week) {
+                    foreach (Block b in d.blocks) {
+                        foreach (Course cb in b.blockCourses) {
+                            if(p == cb.prof){
+                                int number = b.blockNumber + 1;
+                                Console.WriteLine (cb.prof.name + " :");
+                                Console.WriteLine (cb.name);
+                                Console.WriteLine ("in " + cb.room.name);
+                                Console.WriteLine ("Am " + d.day);
+                                Console.WriteLine ("im " + number + ". Block");
+                                Console.WriteLine(" ");
                             }
                         }
                     }
                 }
+            }    
+            break;
+        case "Raume":
+            Console.WriteLine(" ");
+            foreach(Room r in rooms) {
+                foreach (Day d in week) {
+                    foreach (Block b in d.blocks) {
+                        foreach (Course cb in b.blockCourses) {
+                            if(r == cb.room){
+                                int number = b.blockNumber + 1;
+                                Console.WriteLine (cb.room.name + ": ");
+                                Console.WriteLine ("gehalten von " + cb.prof.name);
+                                Console.WriteLine (cb.name);
+                                Console.WriteLine ("Am " + d.day);
+                                Console.WriteLine ("im " + number + ". Block");
+                                Console.WriteLine(" ");
+                            }
+                        }
+                    }
+                }
+            }    
+            break;
+        case "MKB":
+            Console.WriteLine("Case 2");
+            break;
+        case "MIB":
+            Console.WriteLine("Case 2");
+            break;
+        case "OMB":
+            Console.WriteLine("Case 2");
+            break;
+        default:
+            Console.WriteLine("Gesamtstundeplan");
+            Console.WriteLine(" ");
+            string coma;
+            foreach (Day d in week) {
+                foreach (Block b in d.blocks) {
+                    foreach (Course cb in b.blockCourses) {
+                        coma = "";
+                        Console.WriteLine (" ");
+                        int number = b.blockNumber + 1;
+                        Console.WriteLine (cb.name);
+                        Console.WriteLine (cb.room.name);
+                        Console.WriteLine (cb.prof.name);
+                        Console.WriteLine (d.day);
+                        Console.WriteLine (number + ". Block");
+                        foreach (var v in cb.coursesOfStudy){
+                            if(coursesOfStudy.Count > 1)
+                                coma = ", ";
+                            Console.Write (v.name + coma);
+                        }
+                    }
+                }
             }
+            break;
         }
+    }
 
+    public static void GenerateOptionalTimetable (){
+        foreach(var v in optionalCourses){
+
+        }
     }
     public static void LoadJsonRooms () {
         var data = File.ReadAllText ("Rooms.json");
@@ -147,5 +253,10 @@ public class TimetableGenerator {
                 }
             }
         }
+    }
+
+    public static void LoadOptionalCourses (){
+        var data = File.ReadAllText ("OptionalCourses.json");
+        optionalCourses = JsonConvert.DeserializeObject<List<OptionalCourse>> (data);
     }
 }
