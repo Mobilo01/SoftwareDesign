@@ -8,6 +8,7 @@ public class optionalCourseSetter{
                 for(int i=0 ;  i < a.Length; i++){
                     if(a[i].start == o.timeSpanDay.start)
                         o.block = d.blocks[i];
+                        o.prof.profUsed = true;
                 }
             }
         }        

@@ -1,0 +1,123 @@
+{
+        "name": "C0.04",
+        "seatAmount": "30",
+        "roomEquipment": [
+            "Whiteboard",
+            "Tafel"
+        ]
+    },
+    {
+        "name": "I0.02",
+        "seatAmount": "30",
+        "roomEquipment": [
+            "Whiteboard",
+            "Tafel"
+        ]
+    },
+    {
+        "name": "I0.07",
+        "seatAmount": "60",
+        "roomEquipment": [
+            "Whiteboard",
+            "Tafel"
+        ]
+    },
+    {
+        "name": "I0.08",
+        "seatAmount": "30",
+        "roomEquipment": [
+            "Whiteboard",
+            "Tafel"
+        ]
+    },
+    {
+        "name": "I0.13",
+        "seatAmount": "60",
+        "roomEquipment": [
+            "Whiteboard",
+            "Tafel"
+        ]
+    },
+    {
+        "name": "I1.06",
+        "seatAmount": "30",
+        "roomEquipment": [
+            "Whiteboard",
+            "Tafel"
+        ]
+    },
+    {
+        "name": "I1.07",
+        "seatAmount": "30",
+        "roomEquipment": [
+            "Whiteboard",
+            "Tafel"
+        ]
+    },
+    {
+        "name": "I1.10",
+        "seatAmount": "40",
+        "roomEquipment": [
+            "Whiteboard",
+            "Tafel"
+        ]
+    },
+    {
+        "name": "I1.17",
+        "seatAmount": "60",
+        "roomEquipment": [
+            "Whiteboard",
+            "Tafel",
+            "Computer"
+        ]
+    },
+    {
+        "name": "I1.18",
+        "seatAmount": "40",
+        "roomEquipment": [
+            "Whiteboard",
+            "Tafel",
+            "Computer"
+        ]
+    },
+    {
+        "name": "I1.19",
+        "seatAmount": "40",
+        "roomEquipment": [
+            "Whiteboard",
+            "Tafel"
+        ]
+    },
+    {
+        "name": "I1.21",
+        "seatAmount": "40",
+        "roomEquipment": [
+            "Whiteboard",
+            "Tafel"
+        ]
+    },
+    {
+        "name": "L2.08",
+        "seatAmount": "30",
+        "roomEquipment": [
+            "Whiteboard",
+            "Tafel",
+            "Computer"
+        ]
+    },
+    {
+        "name": "L2.09",
+        "seatAmount": "30",
+        "roomEquipment": [
+            "Whiteboard",
+            "Tafel"
+        ]
+    },
+    {
+        "name": "I0.15",
+        "seatAmount": "60",
+        "roomEquipment": [
+            "Whiteboard",
+            "Tafel"
+        ]
+    },

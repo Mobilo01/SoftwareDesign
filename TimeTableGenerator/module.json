@@ -47,9 +47,6 @@
         "description": "Vorlesung",
         "coursesOfStudy": [
             {
-                "name": "MIB 1"
-            },
-            {
                 "name": "OMB 1"
             },
             {
@@ -62,7 +59,7 @@
         ]
     },
     {
-        "name": "Grundlagen der Unternehmensgründung",
+        "name": "Grundlagen der Unternehmensgruendung",
         "description": "Vorlesung, Gruppenarbeit",
         "coursesOfStudy": [
             {
@@ -80,7 +77,7 @@
         ]
     },
     {
-        "name": "Grundlagen Mediengestaltung",
+        "name": "Grundlagen der Mediengestaltung",
         "description": "Vorlesung, Seminar",
         "coursesOfStudy": [
             {
@@ -116,7 +113,7 @@
         ]
     },
     {
-        "name": "Medientechnik,Praktikum MIB",
+        "name": "Medientechnik, Praktikum MIB",
         "description": "Praktikum",
         "coursesOfStudy": [
             {
@@ -124,11 +121,12 @@
             }
         ],
         "equipment": [
-            "Tafel"
+            "Tafel",
+            "Studio"
         ]
     },
     {
-        "name": "Medientechnik,Praktikum OMB + MKB",
+        "name": "Medientechnik, Praktikum OMB + MKB",
         "description": "Praktikum",
         "coursesOfStudy": [
             {
@@ -139,27 +137,13 @@
             }
         ],
         "equipment": [
-            "Tafel"
-        ]
-    },
-    {
-        "name": "MINT-Praktikum",
-        "description": "Praktikum",
-        "coursesOfStudy": [
-            {
-                "name": "MIB 1"
-            },
-            {
-                "name": "OMB 1"
-            }
-        ],
-        "equipment": [
-            "Tafel"
+            "Tafel",
+            "Studio"
         ]
     },
     {
         "name": "Programmieren, Praktikum MIB",
-        "description": "Einzel- und Gruppenarbeit, wöchentliche Aufgaben, Diskussionen in Foren",
+        "description": "Einzel- und Gruppenarbeit, woechentliche Aufgaben, Diskussionen in Foren",
         "coursesOfStudy": [
             {
                 "name": "MIB 1"
@@ -171,7 +155,7 @@
         ]
     },
     {
-        "name": "Programmierung, Praktikum OMB",
+        "name": "Programmieren, Praktikum OMB",
         "description": "Vorlesung",
         "coursesOfStudy": [
             {
@@ -184,7 +168,7 @@
         ]
     },
     {
-        "name": "Programmierung, Vorlesung MIB",
+        "name": "Programmieren, Vorlesung MIB",
         "description": "Vorlesung",
         "coursesOfStudy": [
             {
@@ -196,7 +180,7 @@
         ]
     },
     {
-        "name": "Programmierung, Vorlesung OMB",
+        "name": "Programmieren, Vorlesung OMB",
         "description": "Vorlesung",
         "coursesOfStudy": [
             {
@@ -224,7 +208,7 @@
     },
     {
         "name": "Physik in Medien und Informatik",
-        "description": "Dozenten-Input, Referate/Präsentationen durch Studierende, Coaching in Kleingruppen",
+        "description": "Dozenten-Input, Referate/Praesentationen durch Studierende, Coaching in Kleingruppen",
         "coursesOfStudy": [
             {
                 "name": "MIB 1"
@@ -238,7 +222,7 @@
         ]
     },
     {
-        "name": "Entwicklung Interaktiver Anwendungen I, Vorlesung",
+        "name": "Entwicklung Interaktiver Anwendungen, Vorlesung",
         "description": "Vorlesung",
         "coursesOfStudy": [
             {
@@ -250,7 +234,7 @@
         ]
     },
     {
-        "name": "Entwicklung Interaktiver Anwendungen I, Praktikum",
+        "name": "Entwicklung Interaktiver Anwendungen, Praktikum",
         "description": "Praktikum",
         "coursesOfStudy": [
             {
@@ -299,7 +283,7 @@
     },
     {
         "name": "Computergrafik, Praktikum",
-        "description": "Übungen, Gruppenarbeit",
+        "description": "uebungen, Gruppenarbeit",
         "coursesOfStudy": [
             {
                 "name": "MIB 2"
@@ -323,7 +307,7 @@
         ]
     },
     {
-        "name": "Grundlagen Interaktiver Systeme Praktikum MIB",
+        "name": "Grundlagen Interaktiver Systeme, Praktikum MIB",
         "description": "Praktikum",
         "coursesOfStudy": [
             {
@@ -336,26 +320,8 @@
         ]
     },
     {
-        "name": "Marketing, Vorlesung",
-        "description": "Vorlesung",
-        "coursesOfStudy": [
-            {
-                "name": "MIB 2"
-            },
-            {
-                "name": "OMB 2"
-            },
-            {
-                "name": "MKB 2"
-            }
-        ],
-        "equipment": [
-            "Tafel"
-        ]
-    },
-    {
         "name": "Mathematik und Simulation, Seminar",
-        "description": "Seminar mit studentischen Präsentationen, Gruppen-Coaching",
+        "description": "Seminar mit studentischen Praesentationen, Gruppen-Coaching",
         "coursesOfStudy": [
             {
                 "name": "MIB 2"
@@ -378,7 +344,7 @@
         ]
     },
     {
-        "name": "Medienökonomie",
+        "name": "Medienoekonomie",
         "description": "Vorlesung",
         "coursesOfStudy": [
             {
@@ -443,7 +409,8 @@
             }
         ],
         "equipment": [
-            "Tafel"
+            "Tafel",
+            "Studio"
         ]
     },
     {
@@ -516,7 +483,7 @@
         ]
     },
     {
-        "name": "Grundlagen Interaktiver Systeme Praktikum OMB",
+        "name": "Grundlagen Interaktiver Systeme, Praktikum OMB",
         "description": "Praktikum",
         "coursesOfStudy": [
             {
@@ -529,7 +496,7 @@
         ]
     },
     {
-        "name": "Entwicklung Interaktiver Anwendungen II, Praktikum",
+        "name": "Entwicklung Interaktiver Anwendungen 2, Praktikum",
         "description": "Praktikum",
         "coursesOfStudy": [
             {
@@ -542,7 +509,7 @@
         ]
     },
     {
-        "name": "Entwicklung Interaktiver Anwendungen II, Vorlesung",
+        "name": "Entwicklung Interaktiver Anwendungen 2, Vorlesung",
         "description": "Vorlesung",
         "coursesOfStudy": [
             {
@@ -566,8 +533,8 @@
         ]
     },
     {
-        "name": "Grafische Datenverarbeitung, Übung",
-        "description": "Übung",
+        "name": "Grafische Datenverarbeitung, uebung",
+        "description": "uebung",
         "coursesOfStudy": [
             {
                 "name": "MIB 4"
@@ -616,7 +583,7 @@
         ]
     },
     {
-        "name": "E- Business",
+        "name": "E-Business",
         "description": "Vorlesung",
         "coursesOfStudy": [
             {
@@ -629,7 +596,7 @@
     },
     {
         "name": "Medien- und Kommunikationswirtschaft",
-        "description": "Vorlesung und Übung",
+        "description": "Vorlesung und uebung",
         "coursesOfStudy": [
             {
                 "name": "MKB 4"
@@ -842,35 +809,11 @@
         ]
     },
     {
-        "name": "IT und Medienproduktionsmanagement",
+        "name": "Strategische Markenfuehrung",
         "description": "Vorlesung",
         "coursesOfStudy": [
             {
-                "name": "MIB 6"
-            }
-        ],
-        "equipment": [
-            "Tafel"
-        ]
-    },
-    {
-        "name": "Medientheorie",
-        "description": "Vorlesung",
-        "coursesOfStudy": [
-            {
-                "name": "MKB 6"
-            }
-        ],
-        "equipment": [
-            "Tafel"
-        ]
-    },
-    {
-        "name": "Online-Produktmanagement und Online-Marketing",
-        "description": "Vorlesung",
-        "coursesOfStudy": [
-            {
-                "name": "OMB 6"
+                "name": "MKB 5"
             }
         ],
         "equipment": [
