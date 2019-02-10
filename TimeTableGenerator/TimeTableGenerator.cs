@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -22,16 +24,26 @@ public class TimetableGenerator {
         LoadJsonCourses ();
         LoadMandatoryCourses ();
         LoadProfsToCourses ();
-       // LoadOptionalCourses ();
+        LoadOptionalCourses ();
 
+
+        Task t = Task.Factory.StartNew(() => {
         Initializer ();
 
-        //GenerateOptionalTimetable ();
+        GenerateOptionalTimetable ();
 
         GenerateTimetable ();
 
         SortBy ();
-
+        
+        });
+        t.Wait(new System.TimeSpan(0, 5, 0));
+        if (t.Status == TaskStatus.Running)
+        {
+            Console.WriteLine("Das Programm läuft schon zu lange und wurde beenden...");
+            Console.ReadLine();
+            Environment.Exit(0);
+        }
     }
 
     public static void Initializer () {
@@ -50,22 +62,24 @@ public class TimetableGenerator {
         times[3] = new TimeSpan (new DateTime (2019, 01, 01, 14, 0, 0), new DateTime (2019, 01, 01, 15, 30, 0));
         times[4] = new TimeSpan (new DateTime (2019, 01, 01, 15, 45, 0), new DateTime (2019, 01, 01, 17, 15, 0));
         times[5] = new TimeSpan (new DateTime (2019, 01, 01, 17, 30, 0), new DateTime (2019, 01, 01, 19, 0, 0));
+        
+        foreach (Day du in week) {
+            du.blocks = new List<Block> ();
+            for (int i = 0; i < times.Length; i++) {
+                du.blocks.Add (new Block (times[i], i+1, du.dayName));
+            }
+        }
 
     }
 
     public static void GenerateTimetable () {
         var blocks = week.SelectMany (x => x.blocks);
 
-        foreach (Day du in week) {
-            du.blocks = new List<Block> ();
-            for (int i = 0; i < times.Length; i++) {
-                du.blocks.Add (new Block (times[i], i+1, du.day));
-            }
-        }
         foreach (Day d in week) {
             foreach (Block b in d.blocks) {
                 //b.blockCourses = new List<Course> ();
                 foreach (CourseOfStudy cos in coursesOfStudy) {
+                    
                     foreach (Course c in cos.mandatoryCourses) {
                         if (cos.cosUsed == false){ 
                             if (c.courseUsed == false) {
@@ -82,8 +96,8 @@ public class TimetableGenerator {
                                     if (c.room == null) {
                                         if (r.seatAmount >= c.studentAmount == true) {
                                             if (r != null) {
-                                                if (ListHelper.ContainsAllItems<string> (r.roomEquipment, c.equipment) != false) {
-                                                    if (TimeHelper.TimeCheck (b.timespan.start, b.day, c.prof) != false) {
+                                                if (Helper.ContainsAllItems<string> (r.roomEquipment, c.equipment) != false) {
+                                                    if (Helper.TimeCheck (b.timespan.start, b.day, c.prof) != false) {
                                                         if (c.prof.profUsed == false && r.roomUsed == false) {
                                                             c.room = r;
                                                             c.courseUsed = true;
@@ -110,6 +124,7 @@ public class TimetableGenerator {
                             c.studentAmount = 0;
                         }
                     }
+                    Helper.PrintPossibleOpitonalCourses (cos);
                 }
                 foreach (Course cb in b.blockCourses) {
                     cb.room.roomUsed = false;
@@ -163,7 +178,7 @@ public class TimetableGenerator {
                                 Console.WriteLine (cb.prof.name + " :");
                                 Console.WriteLine (cb.name);
                                 Console.WriteLine ("in " + cb.room.name);
-                                Console.WriteLine ("Am " + d.day);
+                                Console.WriteLine ("Am " + d.dayName);
                                 Console.WriteLine ("im " + b.blockNumber + ". Block");
                                 Console.WriteLine(" ");
                             }
@@ -183,7 +198,7 @@ public class TimetableGenerator {
                                 Console.WriteLine (cb.room.name + ": ");
                                 Console.WriteLine ("gehalten von " + cb.prof.name);
                                 Console.WriteLine (cb.name);
-                                Console.WriteLine ("Am " + d.day);
+                                Console.WriteLine ("Am " + d.dayName);
                                 Console.WriteLine ("im " + b.blockNumber + ". Block");
                                 Console.WriteLine(" ");
                             }
@@ -195,7 +210,7 @@ public class TimetableGenerator {
         case "MKB":
         case "MIB":
         case "OMB":
-            CoursesOfStudyPrinter.PrintCourseOfStudy(content,coursesOfStudy,week);
+            Helper.PrintCourseOfStudy(content);
             break;
         default:
             Console.WriteLine("Gesamtstundeplan");
@@ -211,7 +226,7 @@ public class TimetableGenerator {
                         Console.WriteLine (cb.name);
                         Console.WriteLine (cb.room.name);
                         Console.WriteLine (cb.prof.name);
-                        Console.WriteLine (d.day);
+                        Console.WriteLine (d.dayName);
                         Console.WriteLine (b.blockNumber + ". Block");
 
                         foreach (var v in cb.coursesOfStudy){
@@ -228,8 +243,8 @@ public class TimetableGenerator {
     }
 
     public static void GenerateOptionalTimetable (){
-        foreach(var v in optionalCourses){
-
+        foreach(OptionalCourse o in optionalCourses){
+            Helper.SetBlock(o);
         }
     }
     public static void LoadJsonRooms () {
@@ -255,9 +270,9 @@ public class TimetableGenerator {
     public static void LoadMandatoryCourses () {
         for (int i = 0; i < coursesOfStudy.Count; i++){
             foreach(Course course in courses){
-                    for(int j = 0; j < coursesOfStudy[i].mandatoryCourses.Count; j++)
-                        if(course.name == coursesOfStudy[i].mandatoryCourses[j].name)
-                            coursesOfStudy[i].mandatoryCourses[j] = course;
+                for(int j = 0; j < coursesOfStudy[i].mandatoryCourses.Count; j++)
+                    if(course.name == coursesOfStudy[i].mandatoryCourses[j].name)
+                        coursesOfStudy[i].mandatoryCourses[j] = course;
                 }    
             }
         }
@@ -290,7 +305,7 @@ public class TimetableGenerator {
     }
 
     public static void LoadOptionalCourses (){
-        var data = File.ReadAllText ("OptionalCourses.json");
+        var data = File.ReadAllText ("OptionalCourse.json");
         optionalCourses = JsonConvert.DeserializeObject<List<OptionalCourse>> (data);
     }
 }

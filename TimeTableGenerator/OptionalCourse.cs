@@ -6,6 +6,7 @@ public class OptionalCourse{
     public string description;
     public Room room;
     public int studentAmount;
+    public bool shouldPrint = false;
     public Prof prof;
     public Block block;
     public TimeSpanDay timeSpanDay;

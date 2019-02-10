@@ -6,7 +6,7 @@ public class CoursesOfStudyPrinter {
 
         Console.WriteLine (courseofStudyName + " :");
         Console.WriteLine (" ");
-        CourseOfStudy courseOfStudy = MapHelper.MapCourseOfStudyNameToCourseOfStudy (courseofStudyName);
+        CourseOfStudy courseOfStudy = Helper.MapCourseOfStudyNameToCourseOfStudy (courseofStudyName);
         if (courseOfStudy != null) {
             foreach (Day d in week) {
                 foreach (Block b in d.blocks) {
@@ -16,7 +16,7 @@ public class CoursesOfStudyPrinter {
                                 Console.WriteLine (cb.name);
                                 Console.WriteLine (cb.room.name + ": ");
                                 Console.WriteLine ("gehalten von " + cb.prof.name);
-                                Console.WriteLine ("Am " + d.day);
+                                Console.WriteLine ("Am " + d.dayName);
                                 Console.WriteLine ("im " + b.blockNumber + ". Block");
                                 Console.WriteLine (" ");   
                             }    

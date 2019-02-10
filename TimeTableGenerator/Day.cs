@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 
 public class Day{
-    public Days day;
+    public Days dayName;
     public List<Block> blocks;
 
-    public Day (Days day) 
+    public Day (Days dayName) 
         {
-            this.day = day;
+            this.dayName = dayName;
         } 
 }

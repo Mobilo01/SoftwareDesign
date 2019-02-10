@@ -10,5 +10,5 @@ public class Course{
     public bool courseUsed;
 
     public List<string> equipment;
-    public List<CourseOfStudy> coursesOfStudy;
+    public List<CourseOfStudy> coursesOfStudy = new List<CourseOfStudy>();
 }

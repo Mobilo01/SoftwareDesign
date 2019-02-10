@@ -3,13 +3,13 @@ using System;
 public struct TimeSpanDay{
     public DateTime start;
     public DateTime end;
-    public Days day;
+    public Days dayName;
 
-    public TimeSpanDay(DateTime start, DateTime end, Days day) 
+    public TimeSpanDay(DateTime start, DateTime end, Days dayName) 
     {
         this.start = start;
         this.end = end;
-        this.day = day;
+        this.dayName = dayName;
     }
 
 }
