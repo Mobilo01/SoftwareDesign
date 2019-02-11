@@ -61,7 +61,7 @@ public static class Helper {
 
         Console.WriteLine (courseofStudyName + " :");
         Console.WriteLine (" ");
-        CourseOfStudy courseOfStudy = MapHelper.MapCourseOfStudyNameToCourseOfStudy (courseofStudyName);
+        CourseOfStudy courseOfStudy = MapCourseOfStudyNameToCourseOfStudy (courseofStudyName);
         if (courseOfStudy != null) {
             foreach (Day day in TimetableGenerator.week) {
                 foreach (Block block in day.blocks) {
