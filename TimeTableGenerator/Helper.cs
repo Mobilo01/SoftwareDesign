@@ -79,52 +79,12 @@ public static class Helper {
                     }
                 }
             }
-            PrintPossibleOpitonalCourses (courseOfStudy);
+            PrintPossibleOptionalCourses (courseOfStudy);
         } else
             Console.WriteLine ("Falsche Eingabe, oder Studiengang nicht vorhanden, Bsp: 'MIB 2'");
     }
 
-    public static void PrintPossibleOpitonalCoursesLo (CourseOfStudy courseOfStudy) {
-        Console.WriteLine ("Mit diesem Stundenplan, kannst du folgende Wahlpflichtkurse belegen");
-
-        foreach (Day day in TimetableGenerator.week) {
-            foreach (Block block in day.blocks) {
-                foreach (OptionalCourse optionalCourse in TimetableGenerator.optionalCourses) {
-                    if (block.blockCourses.Count > 0) {
-                        foreach (Course course in block.blockCourses) {
-                            if (course.coursesOfStudy.Count > 0) {
-                                foreach (CourseOfStudy cos in course.coursesOfStudy) {
-                                    if (!(cos.name == courseOfStudy.name)) {
-                                        if (block.timespan.start == optionalCourse.timeSpanDay.start &&
-                                            day.dayName == optionalCourse.timeSpanDay.dayName) {
-                                            optionalCourse.shouldPrint = true;
-                                            break;
-                                            //TimetableGenerator.optionalCourses.Remove(o);
-                                        }
-                                    }
-                                    break;
-                                }
-                            } else
-                                optionalCourse.shouldPrint = true;
-                        }
-                    } else {
-                        optionalCourse.shouldPrint = true;
-                    }
-                    if (optionalCourse.shouldPrint && optionalCourse.optionalCourseUsed == false) {
-                        optionalCourse.optionalCourseUsed = true;
-                        PrintOptionalCourseData (block, day, optionalCourse);
-
-                    } else
-                        Console.WriteLine ("keine");
-                    //break;
-                }
-                //break;
-            }
-            //break;
-        }
-    }
-
-    public static void PrintPossibleOpitonalCourses (CourseOfStudy courseOfStudy) {
+    public static void PrintPossibleOptionalCourses (CourseOfStudy courseOfStudy) {
         bool key = true;
         Console.WriteLine ("Mit diesem Stundenplan, koenntest du folgende Wahlpflichtkurse belegen");
         Console.WriteLine (" ");
