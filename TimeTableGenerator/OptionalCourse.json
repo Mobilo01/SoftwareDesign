@@ -13,9 +13,9 @@
         },
         "timeSpanDay":
             {
+                "dayName": "Donnerstag",
                 "start": "2019-01-01T14:00:00",
-                "end": "2019-01-01T15:30:00",
-                "day": "Donnerstag"
+                "end": "2019-01-01T15:30:00"
             }, 
         "equipment":[
             "Tafel",
@@ -35,9 +35,9 @@
         }, 
         "timeSpanDay":
             {
+                "dayName": "Mittwoch",
                 "start": "2019-01-01T14:00:00",
-                "end": "2019-01-01T15:30:00",
-                "day": "Mittwoch"
+                "end": "2019-01-01T15:30:00"
             }, 
          
         "equipment":[
@@ -59,9 +59,9 @@
 
         "timeSpanDay":
             {
+                "dayName": "Mittwoch",
                 "start": "2019-01-01T15:45:00",
-                "end": "2019-01-01T17:15:00",
-                "day": "Mittwoch"
+                "end": "2019-01-01T17:15:00"
             }, 
         "equipment":[
             "Tafel",

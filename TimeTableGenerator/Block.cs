@@ -5,12 +5,12 @@ public class Block{
     public TimeSpan timespan;
     public int blockNumber;
     public List<Course> blockCourses = new List<Course>();
-    public Days day;
+    public Days dayName;
 
-    public Block (TimeSpan zeit, int blockNumber, Days day) 
+    public Block (TimeSpan zeit, int blockNumber, Days dayName) 
         {
             this.timespan = zeit;
             this.blockNumber = blockNumber;
-            this.day = day;
+            this.dayName = dayName;
         }
 }

@@ -1,4 +1,5 @@
 using System;
+
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -63,55 +64,50 @@ public class TimetableGenerator {
         times[4] = new TimeSpan (new DateTime (2019, 01, 01, 15, 45, 0), new DateTime (2019, 01, 01, 17, 15, 0));
         times[5] = new TimeSpan (new DateTime (2019, 01, 01, 17, 30, 0), new DateTime (2019, 01, 01, 19, 0, 0));
         
-        foreach (Day du in week) {
-            du.blocks = new List<Block> ();
+        foreach (Day day in week) {
+            day.blocks = new List<Block> ();
             for (int i = 0; i < times.Length; i++) {
-                du.blocks.Add (new Block (times[i], i+1, du.dayName));
+                day.blocks.Add (new Block (times[i], i+1, day.dayName));
             }
         }
 
     }
 
     public static void GenerateTimetable () {
-        var blocks = week.SelectMany (x => x.blocks);
+        //var blocks = week.SelectMany (x => x.blocks);
 
-        foreach (Day d in week) {
-            foreach (Block b in d.blocks) {
+        foreach (Day day in week) {
+            foreach (Block block in day.blocks) {
                 //b.blockCourses = new List<Course> ();
-                foreach (CourseOfStudy cos in coursesOfStudy) {
+                foreach (CourseOfStudy courseOfStudy in coursesOfStudy) {
                     
-                    foreach (Course c in cos.mandatoryCourses) {
-                        if (cos.cosUsed == false){ 
-                            if (c.courseUsed == false) {
-                            foreach (var v in coursesOfStudy) {
-                                foreach (var t in c.coursesOfStudy) {
-                                    if (v.name == t.name)
-                                        c.studentAmount = c.studentAmount + v.studentAmount;
-                                }
-                            }
+                    foreach (Course course in courseOfStudy.mandatoryCourses) {
+                        if (courseOfStudy.cosUsed == false){ 
+                            if (course.courseUsed == false) {
+                            Helper.CountStudentAmount(course);
                             //c.studentAmount = c.coursesOfStudy.Sum (s => s.studentAmount);
-                            cos.mandatoryCourses = cos.mandatoryCourses.OrderByDescending (x => c.studentAmount).ToList();
+                            courseOfStudy.mandatoryCourses = courseOfStudy.mandatoryCourses.OrderByDescending (x => course.studentAmount).ToList();
                                 rooms.OrderBy (room => room.seatAmount);    
-                                foreach (Room r in rooms) {
-                                    if (c.room == null) {
-                                        if (r.seatAmount >= c.studentAmount == true) {
-                                            if (r != null) {
-                                                if (Helper.ContainsAllItems<string> (r.roomEquipment, c.equipment) != false) {
-                                                    if (Helper.TimeCheck (b.timespan.start, b.day, c.prof) != false) {
-                                                        if (c.prof.profUsed == false && r.roomUsed == false) {
-                                                            c.room = r;
-                                                            c.courseUsed = true;
-                                                            c.room.roomUsed = true;
-                                                            c.prof.profUsed = true;
-                                                            foreach(var s in c.coursesOfStudy){
-                                                                foreach(var m in coursesOfStudy){
-                                                                    if(s.name == m.name){
+                                foreach (Room room in rooms) {
+                                    if (course.room == null) {
+                                        if (room.seatAmount >= course.studentAmount == true) {
+                                            if (room != null) {
+                                                if (Helper.ContainsAllItems<string> (room.roomEquipment, course.equipment) != false) {
+                                                    if (Helper.TimeCheck (block.timespan.start, block.dayName, course.prof) != false) {
+                                                        if (course.prof.profUsed == false && room.roomUsed == false) {
+                                                            course.room = room;
+                                                            course.courseUsed = true;
+                                                            course.room.roomUsed = true;
+                                                            course.prof.profUsed = true;
+                                                            foreach(var coursesOfStudyOfCourse in course.coursesOfStudy){
+                                                                foreach(var coursesOfStudy in coursesOfStudy){
+                                                                    if(coursesOfStudyOfCourse.name == coursesOfStudy.name){
                                                                         //s.cosUsed = true;
-                                                                        m.cosUsed = true;
+                                                                        coursesOfStudy.cosUsed = true;
                                                                     }
                                                                 }
                                                             }
-                                                            b.blockCourses.Add (c);
+                                                            block.blockCourses.Add (course);
                                                             //c.block = b;
                                                         }
                                                     }
@@ -121,17 +117,17 @@ public class TimetableGenerator {
                                     }
                                 }
                             }
-                            c.studentAmount = 0;
+                            course.studentAmount = 0;
                         }
                     }
-                    Helper.PrintPossibleOpitonalCourses (cos);
+                   // Helper.PrintPossibleOpitonalCourses (cos);
                 }
-                foreach (Course cb in b.blockCourses) {
-                    cb.room.roomUsed = false;
-                    cb.prof.profUsed = false;
+                foreach (Course course in block.blockCourses) {
+                    course.room.roomUsed = false;
+                    course.prof.profUsed = false;
                 }
-                foreach(var s in coursesOfStudy)
-                    s.cosUsed = false;
+                foreach(var coursesOfStudy in coursesOfStudy)
+                    coursesOfStudy.cosUsed = false;
             }
         }
     }
@@ -144,6 +140,8 @@ public class TimetableGenerator {
         Console.WriteLine(" ");
         string content = Console.ReadLine();
         string [] console = content.Split(' ');
+        //string content = "MIB 1";
+        //string con = "MIB";
         string con = console[0]; 
 
 
@@ -165,21 +163,21 @@ public class TimetableGenerator {
         //numb = Console.ReadLine[5];
         Console.WriteLine(" ");
 
-        switch(console[0])
+        switch(con)
       {
         case "Dozent":
             Console.WriteLine(" ");
-            foreach(Prof p in profs) {
-                foreach (Day d in week) {
-                    foreach (Block b in d.blocks) {
-                        foreach (Course cb in b.blockCourses) {
-                            if(p == cb.prof){
+            foreach(Prof prof in profs) {
+                foreach (Day day in week) {
+                    foreach (Block block in day.blocks) {
+                        foreach (Course course in block.blockCourses) {
+                            if(prof == course.prof){
                                 //int number = b.blockNumber + 1;
-                                Console.WriteLine (cb.prof.name + " :");
-                                Console.WriteLine (cb.name);
-                                Console.WriteLine ("in " + cb.room.name);
-                                Console.WriteLine ("Am " + d.dayName);
-                                Console.WriteLine ("im " + b.blockNumber + ". Block");
+                                Console.WriteLine (course.prof.name + " :");
+                                Console.WriteLine (course.name);
+                                Console.WriteLine ("in " + course.room.name);
+                                Console.WriteLine ("Am " + day.dayName);
+                                Console.WriteLine ("im " + block.blockNumber + ". Block");
                                 Console.WriteLine(" ");
                             }
                         }
@@ -189,17 +187,17 @@ public class TimetableGenerator {
             break;
         case "Raume":
             Console.WriteLine(" ");
-            foreach(Room r in rooms) {
-                foreach (Day d in week) {
-                    foreach (Block b in d.blocks) {
-                        foreach (Course cb in b.blockCourses) {
-                            if(r == cb.room){
+            foreach(Room room in rooms) {
+                foreach (Day day in week) {
+                    foreach (Block block in day.blocks) {
+                        foreach (Course course in block.blockCourses) {
+                            if(room == course.room){
                                 //int number = b.blockNumber + 1;
-                                Console.WriteLine (cb.room.name + ": ");
-                                Console.WriteLine ("gehalten von " + cb.prof.name);
-                                Console.WriteLine (cb.name);
-                                Console.WriteLine ("Am " + d.dayName);
-                                Console.WriteLine ("im " + b.blockNumber + ". Block");
+                                Console.WriteLine (course.room.name + ": ");
+                                Console.WriteLine ("gehalten von " + course.prof.name);
+                                Console.WriteLine (course.name);
+                                Console.WriteLine ("Am " + day.dayName);
+                                Console.WriteLine ("im " + block.blockNumber + ". Block");
                                 Console.WriteLine(" ");
                             }
                         }
@@ -216,23 +214,23 @@ public class TimetableGenerator {
             Console.WriteLine("Gesamtstundeplan");
             Console.WriteLine(" ");
             string coma;
-            foreach (Day d in week) {
-                foreach (Block b in d.blocks) {
-                    foreach (Course cb in b.blockCourses) {
+            foreach (Day day in week) {
+                foreach (Block block in day.blocks) {
+                    foreach (Course course in block.blockCourses) {
                         Console.WriteLine(" ");
 
                         coma = " ";
                         //int number = b.blockNumber + 1;
-                        Console.WriteLine (cb.name);
-                        Console.WriteLine (cb.room.name);
-                        Console.WriteLine (cb.prof.name);
-                        Console.WriteLine (d.dayName);
-                        Console.WriteLine (b.blockNumber + ". Block");
+                        Console.WriteLine (course.name);
+                        Console.WriteLine (course.room.name);
+                        Console.WriteLine (course.prof.name);
+                        Console.WriteLine (day.dayName);
+                        Console.WriteLine (block.blockNumber + ". Block");
 
-                        foreach (var v in cb.coursesOfStudy){
-                            if(cb.coursesOfStudy.Count > 1)
+                        foreach (var CoursesOfStudyOfCourse in course.coursesOfStudy){
+                            if(course.coursesOfStudy.Count > 1)
                                 coma = " ";
-                            Console.Write (v.name + coma);
+                            Console.Write (CoursesOfStudyOfCourse.name + coma);
                         }
                         Console.WriteLine (" ");                        
                     }
@@ -243,8 +241,8 @@ public class TimetableGenerator {
     }
 
     public static void GenerateOptionalTimetable (){
-        foreach(OptionalCourse o in optionalCourses){
-            Helper.SetBlock(o);
+        foreach(OptionalCourse optionalCourse in optionalCourses){
+            Helper.SetBlock(optionalCourse);
         }
     }
     public static void LoadJsonRooms () {
@@ -277,7 +275,7 @@ public class TimetableGenerator {
             }
         }
 
-    /*    foreach(CourseOfStudy cos in coursesOfStudy){
+    /*    foreach(CourseOfStudycourseOfStudyin coursesOfStudy){
             foreach(Course c in courses){
                 foreach(Course cb in cos.mandatoryCourses){
                     if(c.name == cb.name)
@@ -294,11 +292,11 @@ public class TimetableGenerator {
         }   */
     
     public static void LoadProfsToCourses () {
-        foreach (Course c in courses) {
-            foreach (Prof p in profs) {
-                foreach (string s in p.courses) {
-                    if (s == c.name)
-                        c.prof = p;
+        foreach (Course course in courses) {
+            foreach (Prof prof in profs) {
+                foreach (string profCourse in prof.courses) {
+                    if (profCourse == course.name)
+                        course.prof = prof;
                 }
             }
         }

@@ -8,8 +8,13 @@ public static class Helper {
         return !b.Except (a).Any ();
     }
 
-    public static int CountStudents () {
-        return 0;
+    public static void CountStudentAmount (Course course) {
+        foreach (CourseOfStudy courseOfStudyOfCourse in course.coursesOfStudy) {
+            foreach (CourseOfStudy courseOfStudy in TimetableGenerator.coursesOfStudy) {
+                if (courseOfStudyOfCourse.name == courseOfStudy.name)
+                    course.studentAmount = course.studentAmount + courseOfStudy.studentAmount;
+            }
+        }
     }
 
     public static CourseOfStudy MapCourseOfStudyNameToCourseOfStudy (string courseOfStudyName) {
@@ -20,31 +25,31 @@ public static class Helper {
         return null;
     }
 
-    public static bool TimeCheck (DateTime a, Days d, Prof p) {
-        foreach (TimeSpanDay s in p.occupied) {
-            if (s.start < a && s.end > a && d == s.dayName)
+    public static bool TimeCheck (DateTime dateTime, Days day, Prof prof) {
+        foreach (TimeSpanDay timeSpanDay in prof.occupied) {
+            if (timeSpanDay.start < dateTime && timeSpanDay.end > dateTime && day == timeSpanDay.dayName)
                 return false;
         }
         return true;
     }
 
-    public static void SetBlock (OptionalCourse o) {
-        foreach (Day d in TimetableGenerator.week) {
-            if (d.dayName == o.timeSpanDay.dayName) {
+    public static void SetBlock (OptionalCourse optionalCourse) {
+        foreach (Day day in TimetableGenerator.week) {
+            if (day.dayName == optionalCourse.timeSpanDay.dayName) {
                 for (int i = 0; i < TimetableGenerator.times.Length; i++) {
-                    if (TimetableGenerator.times[i].start == o.timeSpanDay.start) {
+                    if (TimetableGenerator.times[i].start == optionalCourse.timeSpanDay.start) {
                         TimeSpan timespan = new TimeSpan (TimetableGenerator.times[i].start, TimetableGenerator.times[i].end);
-                        Block block = new Block (timespan, i, d.dayName);
+                        Block block = new Block (timespan, i, day.dayName);
                         Course course = new Course ();
-                        course.name = o.name;
-                        course.prof = o.prof;
-                        course.room = o.room;
+                        course.name = optionalCourse.name;
+                        course.prof = optionalCourse.prof;
+                        course.room = optionalCourse.room;
 
                         block.blockCourses.Add (course);
-                        d.blocks[i] = block;
+                        day.blocks[i] = block;
                         foreach (Prof prof in TimetableGenerator.profs) {
-                            if (o.prof.name == prof.name)
-                                prof.occupied.Add (o.timeSpanDay);
+                            if (optionalCourse.prof.name == prof.name)
+                                prof.occupied.Add (optionalCourse.timeSpanDay);
                         }
                         //o.room.roomUsed = true;
                     }
@@ -58,16 +63,16 @@ public static class Helper {
         Console.WriteLine (" ");
         CourseOfStudy courseOfStudy = MapHelper.MapCourseOfStudyNameToCourseOfStudy (courseofStudyName);
         if (courseOfStudy != null) {
-            foreach (Day d in TimetableGenerator.week) {
-                foreach (Block b in d.blocks) {
-                    foreach (Course bc in b.blockCourses) {
-                        foreach (Course cb in courseOfStudy.mandatoryCourses) {
-                            if (bc == cb) {
-                                Console.WriteLine (cb.name);
-                                Console.WriteLine (cb.room.name + ": ");
-                                Console.WriteLine ("gehalten von " + cb.prof.name);
-                                Console.WriteLine ("Am " + d.dayName);
-                                Console.WriteLine ("im " + b.blockNumber + ". Block");
+            foreach (Day day in TimetableGenerator.week) {
+                foreach (Block block in day.blocks) {
+                    foreach (Course blockCourseCourse in block.blockCourses) {
+                        foreach (Course courseOfMandatoryCourses in courseOfStudy.mandatoryCourses) {
+                            if (blockCourseCourse == courseOfMandatoryCourses) {
+                                Console.WriteLine (courseOfMandatoryCourses.name);
+                                Console.WriteLine (courseOfMandatoryCourses.room.name + ": ");
+                                Console.WriteLine ("gehalten von " + courseOfMandatoryCourses.prof.name);
+                                Console.WriteLine ("Am " + day.dayName);
+                                Console.WriteLine ("im " + block.blockNumber + ". Block");
                                 Console.WriteLine (" ");
                             }
                         }
@@ -79,45 +84,97 @@ public static class Helper {
             Console.WriteLine ("Falsche Eingabe, oder Studiengang nicht vorhanden, Bsp: 'MIB 2'");
     }
 
-    public static void PrintPossibleOpitonalCourses (CourseOfStudy courseOfStudy) {
+    public static void PrintPossibleOpitonalCoursesLo (CourseOfStudy courseOfStudy) {
         Console.WriteLine ("Mit diesem Stundenplan, kannst du folgende Wahlpflichtkurse belegen");
-        
-        foreach (Day d in TimetableGenerator.week) {
-            foreach (Block b in d.blocks) {
-                foreach (OptionalCourse o in TimetableGenerator.optionalCourses) {
-                    if (b.blockCourses.Count > 0){
-                        foreach (Course bc in b.blockCourses) {
-                            if (bc.coursesOfStudy.Count > 0){
-                                foreach (CourseOfStudy cos in bc.coursesOfStudy) {
+
+        foreach (Day day in TimetableGenerator.week) {
+            foreach (Block block in day.blocks) {
+                foreach (OptionalCourse optionalCourse in TimetableGenerator.optionalCourses) {
+                    if (block.blockCourses.Count > 0) {
+                        foreach (Course course in block.blockCourses) {
+                            if (course.coursesOfStudy.Count > 0) {
+                                foreach (CourseOfStudy cos in course.coursesOfStudy) {
                                     if (!(cos.name == courseOfStudy.name)) {
-                                        Console.WriteLine (" ");
-                                        if (b.timespan.start == o.timeSpanDay.start &&
-                                            d.dayName == o.timeSpanDay.dayName) {
-                                            o.shouldPrint = true;
+                                        if (block.timespan.start == optionalCourse.timeSpanDay.start &&
+                                            day.dayName == optionalCourse.timeSpanDay.dayName) {
+                                            optionalCourse.shouldPrint = true;
+                                            break;
                                             //TimetableGenerator.optionalCourses.Remove(o);
                                         }
-                                    }else
-                                        Console.WriteLine ("keine");
-                                } 
-                            }else 
-                                o.shouldPrint = true;
+                                    }
+                                    break;
+                                }
+                            } else
+                                optionalCourse.shouldPrint = true;
                         }
-                    }else 
-                        o.shouldPrint = true;
-                    if(o.shouldPrint)
-                        PrintOptionalCourseData(b,d,o);
+                    } else {
+                        optionalCourse.shouldPrint = true;
+                    }
+                    if (optionalCourse.shouldPrint && optionalCourse.optionalCourseUsed == false) {
+                        optionalCourse.optionalCourseUsed = true;
+                        PrintOptionalCourseData (block, day, optionalCourse);
+
+                    } else
+                        Console.WriteLine ("keine");
+                    //break;
                 }
+                //break;
             }
-            
-        }   
+            //break;
+        }
     }
 
-    public static void PrintOptionalCourseData(Block b, Day day, OptionalCourse o){
-        Console.WriteLine (o.name);
-        Console.WriteLine (o.room.name + ": ");
-        Console.WriteLine ("gehalten von " + o.prof.name);
-        Console.WriteLine ("Am " + day.dayName);
-        Console.WriteLine ("im " + b.blockNumber + ". Block");
+    public static void PrintPossibleOpitonalCourses (CourseOfStudy courseOfStudy) {
+        bool key = true;
+        Console.WriteLine ("Mit diesem Stundenplan, koenntest du folgende Wahlpflichtkurse belegen");
         Console.WriteLine (" ");
+        foreach (Day day in TimetableGenerator.week) {
+            foreach (Block block in day.blocks) {
+                foreach (OptionalCourse optionalCourse in TimetableGenerator.optionalCourses) {
+                    if (block.blockCourses.Count == 0 && optionalCourse.optionalCourseUsed == false) {
+                        if (CheckBlockToCourse (block, optionalCourse.timeSpanDay)) {
+                            optionalCourse.optionalCourseUsed = true;
+                            PrintOptionalCourseData (block, day, optionalCourse);
+                        }
+                    } else {
+                        foreach (Course course in block.blockCourses) {
+                            if (block.blockCourses.Count == 0)
+                                break;
+                            key = true;
+                            for (int i = 0; i < course.coursesOfStudy.Count; i++) {
+                                CourseOfStudy courseOfStudyOfCourses = course.coursesOfStudy[i];
+                                if (courseOfStudyOfCourses.name == courseOfStudy.name || course.coursesOfStudy == null) {
+                                    key = false;
+                                }
+                            }
+
+                            if (key && optionalCourse.optionalCourseUsed == false) {
+                                if (CheckBlockToCourse (block, optionalCourse.timeSpanDay)) {
+                                    PrintOptionalCourseData (block, day, optionalCourse);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
+
+    public static bool CheckBlockToCourse (Block block, TimeSpanDay timeSpanDayCourse) {
+        if (block.timespan.start == timeSpanDayCourse.start &&
+            block.dayName == timeSpanDayCourse.dayName) {
+            return true;
+        }
+        return false;
+    }
+
+    public static void PrintOptionalCourseData (Block block, Day day, OptionalCourse optionalCourse) {
+            int i = block.blockNumber + 1;
+            Console.WriteLine (optionalCourse.name);
+            Console.WriteLine (optionalCourse.room.name + ": ");
+            Console.WriteLine ("gehalten von " + optionalCourse.prof.name);
+            Console.WriteLine ("Am " + day.dayName);
+            Console.WriteLine ("im " + i + ". Block");
+            Console.WriteLine (" ");
+        }
 }
