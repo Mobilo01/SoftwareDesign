@@ -51,7 +51,6 @@ public static class Helper {
                             if (optionalCourse.prof.name == prof.name)
                                 prof.occupied.Add (optionalCourse.timeSpanDay);
                         }
-                        //o.room.roomUsed = true;
                     }
                 }
             }
